@@ -84,6 +84,80 @@
 
 ---
 
+## 3. 总体设计
+
+### 3.1 系统架构
+
+![总体架构](assets/architecture.png)
+
+系统分为三层：
+
+1. **应用外壳层**：`main.py` 负责窗口、导航、模块注册与生命周期；`ui/theme.py` 与 `ui/widgets.py` 提供配色、字体、DPI 缩放和通用控件。
+2. **表现层**：`ui/*_view.py` 六个模块界面，只处理输入收集、状态展示与 Canvas 绘制。
+3. **算法层**：`core/*.py` 六个纯逻辑模块，不导入 tkinter，可独立测试。
+
+> **设计原则**：界面不实现算法，算法不依赖界面。这样每个模块可以由不同成员并行开发，合并时互不冲突。
+
+### 3.2 目录结构
+
+```text
+cs-visualizer/
+├── main.py                     # 应用入口、主窗口、模块注册
+├── README.md                   # 安装运行、截图、分工、协议
+├── LICENSE                     # MIT
+├── .gitignore
+├── core/                       # 纯算法层（无界面依赖）
+│   ├── number_base.py          # 进制转换
+│   ├── twos_complement.py      # 补码加减
+│   ├── parity.py               # ASCII 与奇偶校验
+│   ├── sorting.py              # 四种排序的逐帧状态
+│   ├── scheduling.py           # FCFS / SJF / RR
+│   └── page_replacement.py     # FIFO / LRU / OPT
+├── ui/                         # 表现层
+│   ├── theme.py                # 配色、字体、DPI 缩放
+│   ├── widgets.py              # Card / Segmented / DataTable / BitStrip
+│   ├── base_view.py            # 模块基类
+│   └── *_view.py               # 六个模块界面
+└── docs/
+    ├── Project_Requirements_and_Design.md
+    ├── AI_Prompts_Log.md
+    └── assets/                 # 架构图与运行截图
+```
+
+### 3.3 模块划分
+
+| 模块 | 界面文件 | 算法文件 | 核心数据结构 |
+|---|---|---|---|
+| 进制转换 | `ui/number_base_view.py` | `core/number_base.py` | `steps: list[dict]` |
+| 补码加减 | `ui/twos_complement_view.py` | `core/twos_complement.py` | `steps: list[dict]`、进位链 |
+| ASCII 校验 | `ui/parity_view.py` | `core/parity.py` | 8 位帧字符串 |
+| 排序可视化 | `ui/sorting_view.py` | `core/sorting.py` | 逐帧快照 `frame: dict` |
+| 进程调度 | `ui/scheduling_view.py` | `core/scheduling.py` | `timeline` + `metrics` |
+| 页面置换 | `ui/page_replacement_view.py` | `core/page_replacement.py` | `steps` + `frames` 快照 |
+
+### 3.4 界面设计
+
+- **布局**：左侧 220 px 导航（模块编号 + 名称），右侧为"标题区 + 内容区 + 状态栏"。
+- **配色**：深蓝背景 `#0b1220`，卡片 `#142238`，强调色 `#4cc2ff`，语义色：成功 `#3ddc97`、警告 `#ffc857`、错误 `#ff6b6b`。
+- **字体**：中文 Microsoft YaHei UI，等宽 Cascadia Mono；字号以 pt 为单位，随系统 DPI 自动缩放。
+- **DPI 适配**：`theme.s(px)` 把设计稿像素换算为实际像素（192 DPI 时 ×2），避免高分屏下字体与容器比例失调。
+
+### 3.5 数据流（以补码为例）
+
+```text
+用户输入 A、B 与运算符
+        ↓
+core.twos_complement.analyze(a, b, op)
+        ↓ 返回 a_bits / b_bits / result_bits / steps / overflow
+ui.twos_complement_view 渲染位条、进位行、逐位表格与溢出结论
+        ↓
+app.set_status() 写入底部状态栏
+```
+
+**关键点**：界面拿到的是**完整的结果对象**，不参与运算；所有中间状态由算法层一次性算好，便于回放与测试。
+
+---
+
 ## 4. 模块详细设计
 
 ### 4.1 进制转换演示器
@@ -193,6 +267,18 @@
 
 ---
 
+## 6. 开发计划
+
+| 阶段 | 时间 | 交付物 | 负责人 |
+|---|---|---|---|
+| M1 需求与选题 | 10-08 ~ 10-12 | 仓库、`README.md` 骨架、需求文档初稿 | 全员 |
+| M2 选题审核 | 10-13 ~ 10-14 | 教师评审意见与修订版文档 | 成员A |
+| M3 核心开发 | 10-15 ~ 10-22 | 六个模块与算法自检 | B/C/D/E |
+| M4 集成与冲突 | 10-23 ~ 10-24 | 主分支合并、冲突解决记录 | 成员A |
+| M5 交付 | 10-25 ~ 10-26 | README 截图、AI 日志、课堂演示 | 全员 |
+
+---
+
 ## 7. Git 协作规范
 
 ### 7.1 分支模型
@@ -236,3 +322,26 @@ refactor(core): 拆分调度指标计算
 
 ---
 
+## 8. 风险与应对
+
+| 风险 | 影响 | 应对 |
+|---|---|---|
+| AI 生成代码与 Tkinter 内部 API 冲突 | 运行时报 `TypeError` | 小步运行、保留错误回溯、定位后做最小修改 |
+| 高分屏下布局裁切 | 演示效果差 | 统一 `theme.s()` 缩放，按 200% 实机截图验收 |
+| 多人同时改 `main.py` | 合并冲突 | 冲突作为实验要求主动演练，按模块编号顺序解决 |
+| 动画回调在窗口销毁后触发 | 关闭时报错 | 暂停/重置/销毁前统一 `after_cancel` |
+| 算法边界（LLM 易忽略） | 结果错误 | 每个 `core` 模块内置自检，覆盖 −128、空串、单块等边界 |
+
+---
+
+## 9. 参考资料
+
+1. 课程讲义《计算机科学基础》第 2 章 数据表示、第 5 章 排序与查找。
+2. Python 官方文档：`tkinter`、`tkinter.ttk`。
+3. Git 官方文档：<https://git-scm.com/doc>。
+4. Conventional Commits：<https://www.conventionalcommits.org/>。
+5. 操作系统教材：进程调度与虚拟内存章节。
+
+---
+
+**文档状态**：已按教师评审意见补充"验收标准"与"风险应对"两节，等待复审。
