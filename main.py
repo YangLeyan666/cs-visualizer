@@ -15,12 +15,14 @@ if sys.platform == "win32":
 
 from ui import theme
 from ui.number_base_view import NumberBaseView
+from ui.twos_complement_view import TwosComplementView
 
 APP_NAME = "CS 可视化实验室"
 APP_VERSION = "v1.0.0"
 
 MODULES = [
     ("number_base", "01", "进制转换", "除基取余 / 乘基取整", NumberBaseView),
+    ("twos_complement", "02", "补码加减法", "8 位补码 · 进位与溢出", TwosComplementView),
 ]
 
 
