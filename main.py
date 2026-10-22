@@ -17,6 +17,7 @@ from ui import theme
 from ui.number_base_view import NumberBaseView
 from ui.twos_complement_view import TwosComplementView
 from ui.parity_view import ParityView
+from ui.sorting_view import SortingView
 from ui.scheduling_view import SchedulingView
 
 APP_NAME = "CS 可视化实验室"
@@ -26,6 +27,7 @@ MODULES = [
     ("number_base", "01", "进制转换", "除基取余 / 乘基取整", NumberBaseView),
     ("twos_complement", "02", "补码加减法", "8 位补码 · 进位与溢出", TwosComplementView),
     ("parity", "03", "ASCII 与奇偶校验", "7 位 ASCII · 1 位校验", ParityView),
+    ("sorting", "04", "排序算法可视化", "比较 · 交换 · 动画回放", SortingView),
     ("scheduling", "05", "进程调度模拟", "FCFS / SJF / 时间片轮转", SchedulingView),
 ]
 
