@@ -19,6 +19,7 @@ from ui.twos_complement_view import TwosComplementView
 from ui.parity_view import ParityView
 from ui.sorting_view import SortingView
 from ui.scheduling_view import SchedulingView
+from ui.page_replacement_view import PageReplacementView
 
 APP_NAME = "CS 可视化实验室"
 APP_VERSION = "v1.0.0"
@@ -29,6 +30,7 @@ MODULES = [
     ("parity", "03", "ASCII 与奇偶校验", "7 位 ASCII · 1 位校验", ParityView),
     ("sorting", "04", "排序算法可视化", "比较 · 交换 · 动画回放", SortingView),
     ("scheduling", "05", "进程调度模拟", "FCFS / SJF / 时间片轮转", SchedulingView),
+    ("page_replacement", "06", "页面置换模拟", "FIFO / LRU / OPT", PageReplacementView),
 ]
 
 
