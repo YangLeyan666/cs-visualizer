@@ -144,11 +144,11 @@ cs-visualizer/
 
 | 成员 | 角色 | 负责内容 | 分支 |
 |---|---|---|---|
-| 成员A | 组长 / 集成 | 仓库初始化、主框架、进制转换、README、冲突解决 | `feature/number-base` |
-| 成员B | 算法开发 | 补码加减法模块 | `feature/twos-complement` |
-| 成员C | 算法开发 | ASCII 与奇偶校验模块 | `feature/parity` |
-| 成员D | 可视化开发 | 排序算法可视化模块 | `feature/sorting` |
-| 成员E | 算法开发 | 进程调度、页面置换模块 | `feature/scheduling`、`feature/page-replacement` |
+| 杨乐颜 | 组长 / 集成 | 仓库初始化、主框架、进制转换、README、冲突解决 | `feature/number-base` |
+| 张文栋 | 算法开发 | 补码加减法模块 | `feature/twos-complement` |
+| 轩广卓 | 算法开发 | ASCII 与奇偶校验模块 | `feature/parity` |
+| 陈同俍 | 可视化开发 | 排序算法可视化模块 | `feature/sorting` |
+| 安家璇 | 算法开发 | 进程调度、页面置换模块 | `feature/scheduling`、`feature/page-replacement` |
 
 文档阶段全员在 `docs/feature-proposal` 分支提交各自章节，由组长发起 PR 审查后合并。
 
@@ -171,7 +171,7 @@ main
 
 - 提交信息遵循 `feat/fix/docs/refactor(scope): 说明` 格式。
 - 每个功能分支推送后发起 PR，组长做 Code Review，使用 `--no-ff` 合并保留分支拓扑。
-- 集成阶段主动制造一次冲突：成员D与成员E同时向 `main.py` 的 `MODULES` 列表追加模块，合并时按编号顺序保留双方条目。
+- 集成阶段主动制造一次冲突：陈同俍与安家璇同时向 `main.py` 的 `MODULES` 列表追加模块，合并时按编号顺序保留双方条目。
 
 详细过程见 [`docs/AI_Prompts_Log.md`](docs/AI_Prompts_Log.md)，需求与设计见 [`docs/Project_Requirements_and_Design.md`](docs/Project_Requirements_and_Design.md)。
 
@@ -208,10 +208,10 @@ A：课程以 8 位为主，便于一屏显示进位链。核心函数 `to_bits(
 
 ## 贡献者
 
-- 成员A —— 主框架、进制转换、集成与文档
-- 成员B —— 补码加减法
-- 成员C —— ASCII 与奇偶校验
-- 成员D —— 排序算法可视化
-- 成员E —— 进程调度、页面置换
+- 杨乐颜 —— 主框架、进制转换、集成与文档
+- 张文栋 —— 补码加减法
+- 轩广卓 —— ASCII 与奇偶校验
+- 陈同俍 —— 排序算法可视化
+- 安家璇 —— 进程调度、页面置换
 
 感谢课程讲义与开源社区提供的思路。

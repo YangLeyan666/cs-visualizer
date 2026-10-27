@@ -257,11 +257,11 @@ app.set_status() 写入底部状态栏
 
 | 成员 | 角色 | 负责模块 | 功能分支 | 主要交付 |
 |---|---|---|---|---|
-| **成员A** | 组长 / 集成 | 主框架、进制转换 | `feature/number-base` | 仓库初始化、`main.py`、主题与控件、README、冲突解决 |
-| **成员B** | 算法开发 | 补码加减 | `feature/twos-complement` | `core/twos_complement.py` 与界面、溢出判定 |
-| **成员C** | 算法开发 | ASCII 与奇偶校验 | `feature/parity` | `core/parity.py` 与界面、错误注入 |
-| **成员D** | 可视化开发 | 排序算法 | `feature/sorting` | 四种排序生成器、柱状动画、伪代码高亮 |
-| **成员E** | 算法开发 | 进程调度、页面置换 | `feature/scheduling`、`feature/page-replacement` | 五种调度/置换算法、甘特图与矩阵 |
+| **杨乐颜** | 组长 / 集成 | 主框架、进制转换 | `feature/number-base` | 仓库初始化、`main.py`、主题与控件、README、冲突解决 |
+| **张文栋** | 算法开发 | 补码加减 | `feature/twos-complement` | `core/twos_complement.py` 与界面、溢出判定 |
+| **轩广卓** | 算法开发 | ASCII 与奇偶校验 | `feature/parity` | `core/parity.py` 与界面、错误注入 |
+| **陈同俍** | 可视化开发 | 排序算法 | `feature/sorting` | 四种排序生成器、柱状动画、伪代码高亮 |
+| **安家璇** | 算法开发 | 进程调度、页面置换 | `feature/scheduling`、`feature/page-replacement` | 五种调度/置换算法、甘特图与矩阵 |
 
 **文档阶段**：全员在 `docs/feature-proposal` 分支各自提交负责章节，由组长发起 PR 并审查合并。
 
@@ -272,9 +272,9 @@ app.set_status() 写入底部状态栏
 | 阶段 | 时间 | 交付物 | 负责人 |
 |---|---|---|---|
 | M1 需求与选题 | 10-08 ~ 10-12 | 仓库、`README.md` 骨架、需求文档初稿 | 全员 |
-| M2 选题审核 | 10-13 ~ 10-14 | 教师评审意见与修订版文档 | 成员A |
+| M2 选题审核 | 10-13 ~ 10-14 | 教师评审意见与修订版文档 | 杨乐颜 |
 | M3 核心开发 | 10-15 ~ 10-22 | 六个模块与算法自检 | B/C/D/E |
-| M4 集成与冲突 | 10-23 ~ 10-24 | 主分支合并、冲突解决记录 | 成员A |
+| M4 集成与冲突 | 10-23 ~ 10-24 | 主分支合并、冲突解决记录 | 杨乐颜 |
 | M5 交付 | 10-25 ~ 10-26 | README 截图、AI 日志、课堂演示 | 全员 |
 
 ---
@@ -308,7 +308,7 @@ refactor(core): 拆分调度指标计算
 
 ### 7.4 冲突处理
 
-集成阶段成员D与成员E同时修改了 `main.py` 的 `MODULES` 列表末尾：
+集成阶段陈同俍与安家璇同时修改了 `main.py` 的 `MODULES` 列表末尾：
 
 ```text
 <<<<<<< HEAD
